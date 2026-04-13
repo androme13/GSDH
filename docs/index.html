@@ -524,6 +524,7 @@
         </div>
       </div>
       <nav class="nav">
+        <a href="#preview">Plugin preview</a>
         <a href="#compatibility">Hardware compatibility</a>
         <a href="#latest">Latest release</a>
         <a href="#history">History</a>
@@ -592,6 +593,58 @@
       </div>
     </section>
 
+    <section class="section" id="preview">
+      <div class="card section-card">
+        <div class="section-head">
+          <div>
+            <h2>Plugin preview</h2>
+            <p>A quick visual overview of the GSDH plugin interface, features, and workflow.</p>
+          </div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>What to show here</h3>
+            <ul>
+              <li>Main plugin dashboard</li>
+              <li>Button and knob configuration pages</li>
+              <li>Telemetry mapping or action assignment screens</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>Recommended screenshots</h3>
+            <ul>
+              <li>One clean overview of the plugin UI</li>
+              <li>One detailed setup screen</li>
+              <li>One in-use example with StreamDock actions</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>Suggested captions</h3>
+            <ul>
+              <li>Clear action assignment workflow</li>
+              <li>SimHub integration and hardware control</li>
+              <li>Per-device or per-button configuration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:18px;" class="preview-grid">
+          <div class="mini-card" style="padding:14px;">
+            <div style="aspect-ratio:16/10; border-radius:14px; border:1px dashed var(--line-strong); background:linear-gradient(180deg, rgba(78,155,255,0.10), rgba(255,255,255,0.02)); display:grid; place-items:center; color:var(--muted); font-weight:700; text-align:center; padding:16px;">Screenshot placeholder<br>Main plugin overview</div>
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Replace this block with a screenshot of the main GSDH interface.</div>
+          </div>
+          <div class="mini-card" style="padding:14px;">
+            <div style="aspect-ratio:16/10; border-radius:14px; border:1px dashed var(--line-strong); background:linear-gradient(180deg, rgba(78,155,255,0.10), rgba(255,255,255,0.02)); display:grid; place-items:center; color:var(--muted); font-weight:700; text-align:center; padding:16px;">Screenshot placeholder<br>Configuration screen</div>
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Use this area for button, knob, or telemetry configuration screenshots.</div>
+          </div>
+          <div class="mini-card" style="padding:14px;">
+            <div style="aspect-ratio:16/10; border-radius:14px; border:1px dashed var(--line-strong); background:linear-gradient(180deg, rgba(78,155,255,0.10), rgba(255,255,255,0.02)); display:grid; place-items:center; color:var(--muted); font-weight:700; text-align:center; padding:16px;">Screenshot placeholder<br>In-use example</div>
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Show a practical example of GSDH in use with the target hardware.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="compatibility">
       <div class="card section-card">
         <div class="section-head">
@@ -641,20 +694,6 @@
             </thead>
             <tbody>
               <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP03E</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
-              </tr>
-               <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP153E</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
-              </tr>
-              <tr>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N3</td>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
@@ -667,6 +706,13 @@
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">TBD</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not yet validated</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Add tested models here as validation progresses</td>
               </tr>
               <tr>
                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Soomfon</td>
