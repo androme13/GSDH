@@ -1,4 +1,4 @@
-html = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -524,6 +524,7 @@ html = r"""<!DOCTYPE html>
         </div>
       </div>
       <nav class="nav">
+        <a href="#compatibility">Hardware compatibility</a>
         <a href="#latest">Latest release</a>
         <a href="#history">History</a>
         <a href="https://github.com/androme13/GSDH" target="_blank" rel="noopener">GitHub repo</a>
@@ -587,6 +588,95 @@ html = r"""<!DOCTYPE html>
         <div class="mini-card">
           <h3>Installation note</h3>
           <p>Adjust this section later if you want to add plugin installation steps, SimHub version requirements, or known limitations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compatibility">
+      <div class="card section-card">
+        <div class="section-head">
+          <div>
+            <h2>Hardware compatibility</h2>
+            <p>Compatibility is tracked by brand and model so users can immediately see the current validation level for their device.</p>
+          </div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <h3>How to read this page</h3>
+            <ul>
+              <li><strong>Full support</strong>: validated in normal use and recommended for end users</li>
+              <li><strong>Partial support</strong>: usable, but some features or behaviors still need validation</li>
+              <li><strong>Unknown</strong>: not yet tested or not enough feedback available</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>Device families</h3>
+            <ul>
+              <li>Mirabox</li>
+              <li>Ajazz</li>
+              <li>Soomfon</li>
+              <li>Other compatible clone or rebranded StreamDock-style devices</li>
+            </ul>
+          </div>
+          <div class="mini-card">
+            <h3>Important notes</h3>
+            <ul>
+              <li>Actual behavior may vary depending on firmware version, hardware revision, and Windows environment</li>
+              <li>Direct USB HID access can behave differently across seemingly similar models</li>
+              <li>Simultaneous active control with the vendor application is not officially guaranteed</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; overflow-x:auto;">
+          <table style="width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));">
+            <thead>
+              <tr>
+                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Brand</th>
+                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Model</th>
+                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Status</th>
+                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Coverage</th>
+                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N3</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N4</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">TBD</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not yet validated</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Add tested models here as validation progresses</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Soomfon</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">TBD</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not yet validated</td>
+                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Add tested models here as validation progresses</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 16px;">Other clones</td>
+                <td style="padding:14px 16px;">Various</td>
+                <td style="padding:14px 16px; color:var(--muted); font-weight:800;">Depends on model</td>
+                <td style="padding:14px 16px; color:var(--muted);">Case by case</td>
+                <td style="padding:14px 16px; color:var(--muted);">Compatibility may exist, but validation should be tracked per exact model</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -794,8 +884,3 @@ html = r"""<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-path = "/mnt/data/index.html"
-with open(path, "w", encoding="utf-8") as f:
-    f.write(html)
-print(path)
