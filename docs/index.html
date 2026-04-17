@@ -557,6 +557,30 @@
     }
   </style>
 </head>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" type="button" onclick="closeLightbox()">×</button>
+  <img id="lightboxImage" src="" alt="Zoomed screenshot" onclick="event.stopPropagation()">
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightboxImage').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightboxImage').src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
