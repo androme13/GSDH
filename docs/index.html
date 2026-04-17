@@ -478,6 +478,53 @@
       color: var(--accent-2);
     }
 
+    <style>
+  .zoomable {
+    cursor: zoom-in;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 8, 12, 0.88);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+  }
+
+  .lightbox.open {
+    display: flex;
+  }
+
+  .lightbox img {
+    max-width: min(1400px, 96vw);
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+</style>
+
+
     @media (max-width: 980px) {
       .hero-grid,
       .latest-grid,
@@ -603,42 +650,36 @@
         </div>
         <div class="mini-grid">
           <div class="mini-card">
-            <h3>What to show here</h3>
+            <h3>Info</h3>
             <ul>
-              <li>Main plugin dashboard</li>
-              <li>Button and knob configuration pages</li>
-              <li>Telemetry mapping or action assignment screens</li>
+              <li>Info tab</li>
             </ul>
           </div>
           <div class="mini-card">
-            <h3>Recommended screenshots</h3>
+            <h3>Controls</h3>
             <ul>
-              <li>One clean overview of the plugin UI</li>
-              <li>One detailed setup screen</li>
-              <li>One in-use example with StreamDock actions</li>
+              <li>Controls Tab</li>
             </ul>
           </div>
           <div class="mini-card">
-            <h3>Suggested captions</h3>
+            <h3>Audi</h3>
             <ul>
-              <li>Clear action assignment workflow</li>
-              <li>SimHub integration and hardware control</li>
-              <li>Per-device or per-button configuration</li>
+              <li>Audit Tab</li>
             </ul>
           </div>
         </div>
         <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:18px;" class="preview-grid">
           <div class="mini-card" style="padding:14px;">
-            <img src="screen1.png" alt="GSDH info tab detail" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Detail de l'onglet Info.</div>
+          <img src="screen1.png" alt="GSDH info tab detail" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Info tab.</div>
           </div>
           <div class="mini-card" style="padding:14px;">
-            <img src="screen2.png" alt="GSDH controls tab" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Vue de l'onglet Controls.</div>
+            <img src="screen2.png" alt="GSDH controls tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Controls tab.</div>
           </div>
           <div class="mini-card" style="padding:14px;">
-            <img src="screen3.png" alt="GSDH audit tab" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Vue de l'onglet Audit.</div>
+            <img src="screen3.png" alt="GSDH audit tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Audit t.</div>
           </div>
         </div>
       </div>
