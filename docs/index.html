@@ -414,6 +414,40 @@
             background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
         }
 
+        .step-card {
+            min-height: 190px;
+            display: grid;
+            align-content: start;
+            gap: 12px;
+            position: relative;
+        }
+
+            .step-card::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background: linear-gradient(135deg, rgba(78,155,255,0.12), transparent 45%);
+                pointer-events: none;
+            }
+
+        .step-badge {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: white;
+            font-weight: 900;
+            background: linear-gradient(180deg, #5aa7ff, #2a73d8);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 10px 22px rgba(36,108,216,0.22);
+        }
+
+        .step-card h3,
+        .step-card p {
+            position: relative;
+        }
+
             .mini-card h3 {
                 margin: 0 0 10px;
                 font-size: 17px;
@@ -682,21 +716,20 @@
 
         <section class="section">
             <div class="mini-grid">
-                <div class="mini-card">
-                    <h3>What users download</h3>
-                    <p>Only packaged release assets are presented here, primarily the plugin ZIP files attached to each GitHub release.</p>
+                <div class="mini-card step-card">
+                    <div class="step-badge">1</div>
+                    <h3>Download the latest ZIP</h3>
+                    <p>Use the release button to get the packaged GSDH plugin archive directly from the latest GitHub release.</p>
                 </div>
-                <div class="mini-card">
-                    <h3>Recommended release content</h3>
-                    <ul>
-                        <li>Plugin ZIP package</li>
-                        <li>Short release notes</li>
-                        <li>Compatibility notes if needed</li>
-                    </ul>
+                <div class="mini-card step-card">
+                    <div class="step-badge">2</div>
+                    <h3>Install in SimHub</h3>
+                    <p>Extract the package, copy the plugin files into SimHub, then restart SimHub so GSDH can be loaded cleanly.</p>
                 </div>
-                <div class="mini-card">
-                    <h3>Installation note</h3>
-                    <p>Adjust this section later if you want to add plugin installation steps, SimHub version requirements, or known limitations.</p>
+                <div class="mini-card step-card">
+                    <div class="step-badge">3</div>
+                    <h3>Connect StreamDock</h3>
+                    <p>Plug in the supported device, open the GSDH tab, and assign controls or screens from the plugin interface.</p>
                 </div>
             </div>
         </section>
