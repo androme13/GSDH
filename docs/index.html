@@ -465,6 +465,110 @@
                 padding-left: 18px;
             }
 
+        .carousel {
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .carousel-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line-strong);
+            background: rgba(0, 0, 0, 0.22);
+        }
+
+        .carousel-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+
+        .carousel-caption {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 16px;
+            border-top: 1px solid var(--line);
+            background: rgba(8, 12, 18, 0.72);
+        }
+
+        .carousel-title {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .carousel-count {
+            flex: 0 0 auto;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(8, 12, 18, 0.72);
+            color: white;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+            .carousel-arrow:hover,
+            .carousel-thumb:hover {
+                border-color: var(--line-strong);
+                background: rgba(240,79,79,0.14);
+            }
+
+        .carousel-prev {
+            left: 14px;
+        }
+
+        .carousel-next {
+            right: 14px;
+        }
+
+        .carousel-thumbs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+        }
+
+        .carousel-thumb {
+            min-width: 0;
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.02);
+            cursor: pointer;
+        }
+
+            .carousel-thumb.active {
+                border-color: var(--accent);
+                background: rgba(240,79,79,0.12);
+            }
+
+            .carousel-thumb img {
+                display: block;
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
         .history {
             display: grid;
             gap: 14px;
@@ -742,40 +846,7 @@
                         <p>A quick visual overview of the GSDH plugin interface, features, and workflow.</p>
                     </div>
                 </div>
-                <div class="mini-grid">
-                    <div class="mini-card">
-                        <h3>Info</h3>
-                        <ul>
-                            <li>Info tab</li>
-                        </ul>
-                    </div>
-                    <div class="mini-card">
-                        <h3>Controls</h3>
-                        <ul>
-                            <li>Controls Tab</li>
-                        </ul>
-                    </div>
-                    <div class="mini-card">
-                        <h3>Audi</h3>
-                        <ul>
-                            <li>Audit Tab</li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:18px;" class="preview-grid">
-                    <div class="mini-card" style="padding:14px;">
-                        <img src="screen1.png" alt="GSDH info tab detail" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Info tab.</div>
-                    </div>
-                    <div class="mini-card" style="padding:14px;">
-                        <img src="screen2.png" alt="GSDH controls tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Controls tab.</div>
-                    </div>
-                    <div class="mini-card" style="padding:14px;">
-                        <img src="screen3.png" alt="GSDH audit tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Audit tab.</div>
-                    </div>
-                </div>
+                <div class="carousel" id="mediaCarousel"></div>
             </div>
         </section>
 
@@ -922,6 +993,13 @@
         const releaseCount = document.getElementById('releaseCount');
         const latestVersionStat = document.getElementById('latestVersionStat');
         const heroDownloadBtn = document.getElementById('heroDownloadBtn');
+        const mediaCarousel = document.getElementById('mediaCarousel');
+        const mediaFiles = [
+        'medias/screen1.png',
+        'medias/screen2.png',
+        'medias/screen3.png'
+        ];
+        let activeMediaIndex = 0;
 
         function escapeHtml(str = '') {
         return String(str)
@@ -930,6 +1008,52 @@
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
+        }
+
+        function titleFromMediaPath(path) {
+        const fileName = String(path).split('/').pop() || '';
+        const baseName = fileName.replace(/\.[^.]+$/, '');
+        return baseName
+        .replace(/[_-]+/g, ' ')
+        .replace(/([a-z])([0-9])/gi, '$1 $2')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, char => char.toUpperCase()) || 'Preview';
+        }
+
+        function showMedia(index) {
+        if (!mediaFiles.length) return;
+        activeMediaIndex = (index + mediaFiles.length) % mediaFiles.length;
+        renderMediaCarousel();
+        }
+
+        function renderMediaCarousel() {
+        if (!mediaCarousel) return;
+        if (!mediaFiles.length) {
+        mediaCarousel.innerHTML = '<div class="empty">No preview images are available yet.</div>';
+        return;
+        }
+
+        const current = mediaFiles[activeMediaIndex];
+        const title = titleFromMediaPath(current);
+        mediaCarousel.innerHTML = `
+        <div class="carousel-stage">
+        <img class="carousel-image" src="${current}" alt="${escapeHtml(title)}" onclick="openLightbox(this.src)">
+        <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous image" onclick="showMedia(${activeMediaIndex - 1})">‹</button>
+        <button class="carousel-arrow carousel-next" type="button" aria-label="Next image" onclick="showMedia(${activeMediaIndex + 1})">›</button>
+        <div class="carousel-caption">
+        <h3 class="carousel-title">${escapeHtml(title)}</h3>
+        <div class="carousel-count">${activeMediaIndex + 1} / ${mediaFiles.length}</div>
+        </div>
+        </div>
+        <div class="carousel-thumbs">
+        ${mediaFiles.map((file, index) => `
+        <button class="carousel-thumb ${index === activeMediaIndex ? 'active' : ''}" type="button" aria-label="Show ${escapeHtml(titleFromMediaPath(file))}" onclick="showMedia(${index})">
+        <img src="${file}" alt="${escapeHtml(titleFromMediaPath(file))}">
+        </button>
+        `).join('')}
+        </div>
+        `;
         }
 
         function formatDate(value) {
@@ -1082,6 +1206,7 @@
         }
         }
 
+        renderMediaCarousel();
         loadReleases();
     </script>
 </body>
