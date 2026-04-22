@@ -1,944 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GSDH Downloads</title>
-  <style>
-    :root {
-      --bg: #080c12;
-      --bg-2: #0e141d;
-      --panel: rgba(15, 21, 31, 0.92);
-      --panel-2: rgba(18, 26, 38, 0.92);
-      --panel-3: rgba(31, 44, 62, 0.48);
-      --text: #edf3fb;
-      --muted: #9aabc1;
-      --line: rgba(143, 163, 191, 0.16);
-      --line-strong: rgba(120, 170, 255, 0.3);
-      --accent: #4e9bff;
-      --accent-2: #77bbff;
-      --accent-3: rgba(78, 155, 255, 0.12);
-      --success: #59db8a;
-      --warning: #ffcf70;
-      --danger: #ff7b7b;
-      --shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --maxw: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      background:
-        radial-gradient(circle at 12% 0%, rgba(78, 155, 255, 0.16), transparent 24%),
-        radial-gradient(circle at 88% 12%, rgba(119, 187, 255, 0.12), transparent 18%),
-        linear-gradient(180deg, #070b11 0%, #0a1018 100%);
-      color: var(--text);
-      font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .wrap {
-      width: min(calc(100% - 32px), var(--maxw));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(8, 12, 18, 0.72);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .topbar-inner {
-      width: min(calc(100% - 32px), var(--maxw));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      min-height: 72px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-mark {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: white;
-      background:
-        linear-gradient(180deg, #5aa7ff 0%, #2a73d8 100%);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.18),
-        0 12px 26px rgba(36, 108, 216, 0.28);
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 15px;
-      letter-spacing: 0.01em;
-    }
-
-    .brand-text span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav a,
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 0 16px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
-    }
-
-    .nav a:hover,
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(180deg, var(--accent), #2d7fdb);
-      color: white;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
-    }
-
-    .btn-secondary,
-    .nav a {
-      background: rgba(255,255,255,0.02);
-      border-color: var(--line);
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 42px 0 24px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 22px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(15,21,31,0.96), rgba(11,16,24,0.96));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-main {
-      position: relative;
-      padding: 34px;
-      isolation: isolate;
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: -10% auto auto 58%;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(78,155,255,0.14), transparent 66%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(78,155,255,0.24);
-      background: rgba(78,155,255,0.1);
-      color: var(--accent-2);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    h1 {
-      margin: 18px 0 14px;
-      font-size: clamp(34px, 7vw, 60px);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-    }
-
-    .hero-copy {
-      margin: 0;
-      max-width: 720px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 16px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .hero-note {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .stats-card {
-      padding: 20px;
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .stat {
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
-    }
-
-    .stat-label {
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    .stat-value {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      word-break: break-word;
-    }
-
-    .stat-copy {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .section {
-      margin: 22px 0;
-    }
-
-    .section-card {
-      padding: 24px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: 25px;
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .latest-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-    }
-
-    .panel {
-      padding: 20px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.014));
-    }
-
-    .release-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 32px;
-      padding: 0 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(89, 219, 138, 0.18);
-      background: rgba(89, 219, 138, 0.08);
-      color: #90f0b4;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .release-title {
-      margin: 14px 0 10px;
-      font-size: 29px;
-      letter-spacing: -0.04em;
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .release-body {
-      color: var(--text);
-      line-height: 1.8;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .release-body:empty::before {
-      content: "No release notes provided.";
-      color: var(--muted);
-    }
-
-    .assets {
-      display: grid;
-      gap: 12px;
-    }
-
-    .asset {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--line);
-      background: var(--panel-3);
-    }
-
-    .asset-main {
-      min-width: 0;
-    }
-
-    .asset-name {
-      font-weight: 800;
-      word-break: break-word;
-    }
-
-    .asset-meta {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .mini-card {
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
-    }
-
-    .mini-card h3 {
-      margin: 0 0 10px;
-      font-size: 17px;
-      letter-spacing: -0.02em;
-    }
-
-    .mini-card p, .mini-card li {
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .mini-card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .history {
-      display: grid;
-      gap: 14px;
-    }
-
-    .history-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 16px 18px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    }
-
-    .history-main h3 {
-      margin: 0 0 6px;
-      font-size: 18px;
-      letter-spacing: -0.02em;
-    }
-
-    .history-main p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .history-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .empty, .loading, .error {
-      padding: 18px;
-      border-radius: var(--radius-md);
-      line-height: 1.75;
-      background: rgba(255,255,255,0.02);
-    }
-
-    .loading, .empty {
-      color: var(--muted);
-      border: 1px dashed var(--line);
-    }
-
-    .error {
-      color: #ffd9d9;
-      border: 1px solid rgba(255, 123, 123, 0.24);
-      background: rgba(255, 123, 123, 0.08);
-    }
-
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-
-    .footer {
-      padding: 6px 0 44px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-      line-height: 1.7;
-    }
-
-    .footer a {
-      color: var(--accent-2);
-    }
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSDH Downloads</title>
     <style>
-  .zoomable {
-    cursor: zoom-in;
-  }
+        :root {
+            --bg: #080c12;
+            --bg-2: #0e141d;
+            --panel: rgba(15, 21, 31, 0.92);
+            --panel-2: rgba(18, 26, 38, 0.92);
+            --panel-3: rgba(31, 44, 62, 0.48);
+            --text: #edf3fb;
+            --muted: #9aabc1;
+            --line: rgba(143, 163, 191, 0.16);
+            --line-strong: rgba(120, 170, 255, 0.3);
+            --accent: #4e9bff;
+            --accent-2: #77bbff;
+            --accent-3: rgba(78, 155, 255, 0.12);
+            --success: #59db8a;
+            --warning: #ffcf70;
+            --danger: #ff7b7b;
+            --shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --maxw: 1180px;
+        }
 
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(5, 8, 12, 0.88);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
-  }
+        * {
+            box-sizing: border-box;
+        }
 
-  .lightbox.open {
-    display: flex;
-  }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: radial-gradient(circle at 12% 0%, rgba(78, 155, 255, 0.16), transparent 24%), radial-gradient(circle at 88% 12%, rgba(119, 187, 255, 0.12), transparent 18%), linear-gradient(180deg, #070b11 0%, #0a1018 100%);
+            color: var(--text);
+            font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        }
 
-  .lightbox img {
-    max-width: min(1400px, 96vw);
-    max-height: 90vh;
-    width: auto;
-    height: auto;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-  .lightbox-close {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 46px;
-    height: 46px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-  }
-    @media (max-width: 980px) {
-      .hero-grid,
-      .latest-grid,
-      .mini-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+        .wrap {
+            width: min(calc(100% - 32px), var(--maxw));
+            margin: 0 auto;
+        }
 
-    @media (max-width: 760px) {
-      .topbar-inner,
-      .brand {
-        align-items: flex-start;
-      }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            background: rgba(8, 12, 18, 0.72);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
 
-      .topbar-inner {
-        min-height: auto;
-        padding: 14px 0;
-        flex-direction: column;
-      }
+        .topbar-inner {
+            width: min(calc(100% - 32px), var(--maxw));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            min-height: 72px;
+        }
 
-      .hero-main,
-      .section-card {
-        padding: 20px;
-      }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
-      .history-item {
-        grid-template-columns: 1fr;
-      }
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: white;
+            background: linear-gradient(180deg, #5aa7ff 0%, #2a73d8 100%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 26px rgba(36, 108, 216, 0.28);
+        }
 
-      .history-actions {
-        justify-content: flex-start;
-      }
-    }
-  </style>
+        .brand-text strong {
+            display: block;
+            font-size: 15px;
+            letter-spacing: 0.01em;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+            .nav a,
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                min-height: 46px;
+                padding: 0 16px;
+                border-radius: 12px;
+                border: 1px solid transparent;
+                font-weight: 700;
+                transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+            }
+
+                .nav a:hover,
+                .btn:hover {
+                    transform: translateY(-1px);
+                }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--accent), #2d7fdb);
+            color: white;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+
+        .btn-secondary,
+        .nav a {
+            background: rgba(255,255,255,0.02);
+            border-color: var(--line);
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 42px 0 24px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 22px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(15,21,31,0.96), rgba(11,16,24,0.96));
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-main {
+            position: relative;
+            padding: 34px;
+            isolation: isolate;
+        }
+
+            .hero-main::before {
+                content: "";
+                position: absolute;
+                inset: -10% auto auto 58%;
+                width: 320px;
+                height: 320px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(78,155,255,0.14), transparent 66%);
+                pointer-events: none;
+                z-index: -1;
+            }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(78,155,255,0.24);
+            background: rgba(78,155,255,0.1);
+            color: var(--accent-2);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        h1 {
+            margin: 18px 0 14px;
+            font-size: clamp(34px, 7vw, 60px);
+            line-height: 0.98;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-copy {
+            margin: 0;
+            max-width: 720px;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 16px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .hero-note {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .stats-card {
+            padding: 20px;
+            display: grid;
+            gap: 16px;
+            align-content: start;
+        }
+
+        .stat {
+            padding: 18px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.014));
+        }
+
+        .stat-label {
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            word-break: break-word;
+        }
+
+        .stat-copy {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin: 22px 0;
+        }
+
+        .section-card {
+            padding: 24px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+            .section-head h2 {
+                margin: 0;
+                font-size: 25px;
+                letter-spacing: -0.03em;
+            }
+
+            .section-head p {
+                margin: 6px 0 0;
+                color: var(--muted);
+                line-height: 1.7;
+            }
+
+        .latest-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 18px;
+        }
+
+        .panel {
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.014));
+        }
+
+        .release-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 32px;
+            padding: 0 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(89, 219, 138, 0.18);
+            background: rgba(89, 219, 138, 0.08);
+            color: #90f0b4;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .release-title {
+            margin: 14px 0 10px;
+            font-size: 29px;
+            letter-spacing: -0.04em;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .release-body {
+            color: var(--text);
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+            .release-body:empty::before {
+                content: "No release notes provided.";
+                color: var(--muted);
+            }
+
+        .assets {
+            display: grid;
+            gap: 12px;
+        }
+
+        .asset {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--line);
+            background: var(--panel-3);
+        }
+
+        .asset-main {
+            min-width: 0;
+        }
+
+        .asset-name {
+            font-weight: 800;
+            word-break: break-word;
+        }
+
+        .asset-meta {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .mini-card {
+            padding: 18px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
+        }
+
+            .mini-card h3 {
+                margin: 0 0 10px;
+                font-size: 17px;
+                letter-spacing: -0.02em;
+            }
+
+            .mini-card p, .mini-card li {
+                color: var(--muted);
+                line-height: 1.7;
+                margin: 0;
+            }
+
+            .mini-card ul {
+                margin: 0;
+                padding-left: 18px;
+            }
+
+        .history {
+            display: grid;
+            gap: 14px;
+        }
+
+        .history-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 16px 18px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        }
+
+        .history-main h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .history-main p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .history-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .empty, .loading, .error {
+            padding: 18px;
+            border-radius: var(--radius-md);
+            line-height: 1.75;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .loading, .empty {
+            color: var(--muted);
+            border: 1px dashed var(--line);
+        }
+
+        .error {
+            color: #ffd9d9;
+            border: 1px solid rgba(255, 123, 123, 0.24);
+            background: rgba(255, 123, 123, 0.08);
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .footer {
+            padding: 6px 0 44px;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+            .footer a {
+                color: var(--accent-2);
+            }
+
+        <style >
+        .zoomable {
+            cursor: zoom-in;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(5, 8, 12, 0.88);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+        }
+
+            .lightbox.open {
+                display: flex;
+            }
+
+            .lightbox img {
+                max-width: min(1400px, 96vw);
+                max-height: 90vh;
+                width: auto;
+                height: auto;
+                border-radius: 18px;
+                border: 1px solid rgba(255,255,255,0.08);
+                box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            }
+
+        .lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid,
+            .latest-grid,
+            .mini-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .topbar-inner,
+            .brand {
+                align-items: flex-start;
+            }
+
+            .topbar-inner {
+                min-height: auto;
+                padding: 14px 0;
+                flex-direction: column;
+            }
+
+            .hero-main,
+            .section-card {
+                padding: 20px;
+            }
+
+            .history-item {
+                grid-template-columns: 1fr;
+            }
+
+            .history-actions {
+                justify-content: flex-start;
+            }
+        }
+    </style>
 </head>
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" type="button" onclick="closeLightbox()">×</button>
-  <img id="lightboxImage" src="" alt="Zoomed screenshot" onclick="event.stopPropagation()">
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" type="button" onclick="closeLightbox()">×</button>
+    <img id="lightboxImage" src="" alt="Zoomed screenshot" onclick="event.stopPropagation()">
 </div>
 
 <script>
-  function openLightbox(src) {
+    function openLightbox(src) {
     document.getElementById('lightboxImage').src = src;
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
-  }
+    }
 
-  function closeLightbox() {
+    function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.getElementById('lightboxImage').src = '';
     document.body.style.overflow = '';
-  }
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      closeLightbox();
     }
-  });
+
+    document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+    closeLightbox();
+    }
+    });
 </script>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-mark">G</div>
-        <div class="brand-text">
-          <strong>GSDH Downloads</strong>
-          <span>SimHub plugin packages for StreamDock hardware</span>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="brand-mark">G</div>
+                <div class="brand-text">
+                    <strong>GSDH Downloads</strong>
+                    <span>SimHub plugin packages for StreamDock hardware</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="#preview">Plugin preview</a>
+                <a href="#compatibility">Hardware compatibility</a>
+                <a href="#latest">Latest release</a>
+                <a href="#history">History</a>
+                <a href="https://github.com/androme13/GSDH" target="_blank" rel="noopener">GitHub repo</a>
+            </nav>
         </div>
-      </div>
-      <nav class="nav">
-        <a href="#preview">Plugin preview</a>
-        <a href="#compatibility">Hardware compatibility</a>
-        <a href="#latest">Latest release</a>
-        <a href="#history">History</a>
-        <a href="https://github.com/androme13/GSDH" target="_blank" rel="noopener">GitHub repo</a>
-      </nav>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="card hero-main">
+                    <div class="eyebrow">Official packaged downloads</div>
+                    <h1>Download GSDH releases</h1>
+                    <p class="hero-copy">
+                        GSDH is a SimHub plugin for StreamDock devices. This page is dedicated to packaged release downloads only.
+                        Source code archives are not listed here. Users see the ZIP files attached to your GitHub releases.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" id="heroDownloadBtn" href="#latest">Latest release</a>
+                        <a class="btn btn-secondary" href="https://github.com/androme13/GSDH/releases" target="_blank" rel="noopener">Open releases on GitHub</a>
+                    </div>
+                    <div class="hero-note">
+                        Publish a new GitHub release, attach your plugin ZIP, and this page updates automatically.
+                    </div>
+                </div>
+
+                <aside class="card stats-card">
+                    <div class="stat">
+                        <div class="stat-label">Repository</div>
+                        <div class="stat-value mono">androme13/GSDH</div>
+                        <div class="stat-copy">Public release feed used for this download page.</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Published releases</div>
+                        <div class="stat-value" id="releaseCount">-</div>
+                        <div class="stat-copy">Draft releases are ignored until published.</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Latest version</div>
+                        <div class="stat-value" id="latestVersionStat">Not published yet</div>
+                        <div class="stat-copy">Shown as soon as the first public release is available.</div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="mini-grid">
+                <div class="mini-card">
+                    <h3>What users download</h3>
+                    <p>Only packaged release assets are presented here, primarily the plugin ZIP files attached to each GitHub release.</p>
+                </div>
+                <div class="mini-card">
+                    <h3>Recommended release content</h3>
+                    <ul>
+                        <li>Plugin ZIP package</li>
+                        <li>Short release notes</li>
+                        <li>Compatibility notes if needed</li>
+                    </ul>
+                </div>
+                <div class="mini-card">
+                    <h3>Installation note</h3>
+                    <p>Adjust this section later if you want to add plugin installation steps, SimHub version requirements, or known limitations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="preview">
+            <div class="card section-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Plugin preview</h2>
+                        <p>A quick visual overview of the GSDH plugin interface, features, and workflow.</p>
+                    </div>
+                </div>
+                <div class="mini-grid">
+                    <div class="mini-card">
+                        <h3>Info</h3>
+                        <ul>
+                            <li>Info tab</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Controls</h3>
+                        <ul>
+                            <li>Controls Tab</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Audi</h3>
+                        <ul>
+                            <li>Audit Tab</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:18px;" class="preview-grid">
+                    <div class="mini-card" style="padding:14px;">
+                        <img src="screen1.png" alt="GSDH info tab detail" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Info tab.</div>
+                    </div>
+                    <div class="mini-card" style="padding:14px;">
+                        <img src="screen2.png" alt="GSDH controls tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Controls tab.</div>
+                    </div>
+                    <div class="mini-card" style="padding:14px;">
+                        <img src="screen3.png" alt="GSDH audit tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
+                        <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Audit tab.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="compatibility">
+            <div class="card section-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Hardware compatibility</h2>
+                        <p>Compatibility is tracked by brand and model so users can immediately see the current validation level for their device.</p>
+                    </div>
+                </div>
+                <div class="mini-grid">
+                    <div class="mini-card">
+                        <h3>How to read this page</h3>
+                        <ul>
+                            <li><strong>Full support</strong>: validated in normal use and recommended for end users</li>
+                            <li><strong>Partial support</strong>: usable, but some features or behaviors still need validation</li>
+                            <li><strong>Unknown</strong>: not yet tested or not enough feedback available</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Device families</h3>
+                        <ul>
+                            <li>Mirabox</li>
+                            <li>Ajazz</li>
+                            <li>VSD</li>
+                            <li>Soomfon</li>
+                            <li>Other compatible clone or rebranded StreamDock-style devices</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Important notes</h3>
+                        <ul>
+                            <li>Actual behavior may vary depending on firmware version, hardware revision, and Windows environment</li>
+                            <li>Direct USB HID access can behave differently across seemingly similar models</li>
+                            <li>Simultaneous active control with the vendor application is not officially guaranteed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:18px; overflow-x:auto;">
+                    <table style="width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Brand</th>
+                                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Model</th>
+                                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Status</th>
+                                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Coverage</th>
+                                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP03E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP153E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N3</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N4</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">VSD</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N1</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Mapped as N1 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Recognized as VID:PID 5548:1002. Hardware validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Soomfon</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">TBD</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not yet validated</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Add tested models here as validation progresses</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px;">Other clones</td>
+                                <td style="padding:14px 16px;">Various</td>
+                                <td style="padding:14px 16px; color:var(--muted); font-weight:800;">Depends on model</td>
+                                <td style="padding:14px 16px; color:var(--muted);">Case by case</td>
+                                <td style="padding:14px 16px; color:var(--muted);">Compatibility may exist, but validation should be tracked per exact model</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="latest">
+            <div class="card section-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Latest release</h2>
+                        <p>The newest public GSDH package published on GitHub.</p>
+                    </div>
+                </div>
+                <div id="latestContent" class="loading">Loading release information…</div>
+            </div>
+        </section>
+
+        <section class="section" id="history">
+            <div class="card section-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Release history</h2>
+                        <p>Older packaged versions remain available here once published.</p>
+                    </div>
+                </div>
+                <div id="historyContent" class="loading">Loading release history…</div>
+            </div>
+        </section>
+    </main>
+
+    <div class="wrap footer">
+        GSDH download center powered by GitHub Releases · <a href="https://github.com/androme13/GSDH" target="_blank" rel="noopener">Repository</a>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="eyebrow">Official packaged downloads</div>
-          <h1>Download GSDH releases</h1>
-          <p class="hero-copy">
-            GSDH is a SimHub plugin for StreamDock devices. This page is dedicated to packaged release downloads only.
-            Source code archives are not listed here. Users see the ZIP files attached to your GitHub releases.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" id="heroDownloadBtn" href="#latest">Latest release</a>
-            <a class="btn btn-secondary" href="https://github.com/androme13/GSDH/releases" target="_blank" rel="noopener">Open releases on GitHub</a>
-          </div>
-          <div class="hero-note">
-            GSDH GitHub release.
-          </div>
-        </div>
+    <script>
+        const owner = 'androme13';
+        const repo = 'GSDH';
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
 
-        <aside class="card stats-card">
-          <div class="stat">
-            <div class="stat-label">Repository</div>
-            <div class="stat-value mono">androme13/GSDH</div>
-            <div class="stat-copy">Public release feed used for this download page.</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Published releases</div>
-            <div class="stat-value" id="releaseCount">-</div>
-            <div class="stat-copy">Draft releases are ignored until published.</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Latest version</div>
-            <div class="stat-value" id="latestVersionStat">Not published yet</div>
-            <div class="stat-copy">Shown as soon as the first public release is available.</div>
-          </div>
-        </aside>
-      </div>
-    </section>
-    <section class="section" id="preview">
-      <div class="card section-card">
-        <div class="section-head">
-          <div>
-            <h2>Plugin preview</h2>
-            <p>A quick visual overview of the GSDH plugin interface, features, and workflow.</p>
-          </div>
-        </div>
-        <div class="mini-grid">
-          <div class="mini-card">
-            <h3>Info</h3>
-            <ul>
-              <li>Info tab</li>
-            </ul>
-          </div>
-          <div class="mini-card">
-            <h3>Controls</h3>
-            <ul>
-              <li>Controls Tab</li>
-            </ul>
-          </div>
-          <div class="mini-card">
-            <h3>Audit</h3>
-            <ul>
-              <li>Audit Tab</li>
-            </ul>
-          </div>
-        </div>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:18px;" class="preview-grid">
-          <div class="mini-card" style="padding:14px;">
-          <img src="screen1.png" alt="GSDH info tab detail" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Info tab.</div>
-          </div>
-          <div class="mini-card" style="padding:14px;">
-            <img src="screen2.png" alt="GSDH controls tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Controls tab.</div>
-          </div>
-          <div class="mini-card" style="padding:14px;">
-            <img src="screen3.png" alt="GSDH audit tab" class="zoomable" style="width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:14px; border:1px solid var(--line-strong);" onclick="openLightbox(this.src)">
-            <div style="margin-top:12px; color:var(--muted); line-height:1.7;">Audit tab.</div>
-          </div>
-        </div>
-      </div>
-    </section>
+        const latestContent = document.getElementById('latestContent');
+        const historyContent = document.getElementById('historyContent');
+        const releaseCount = document.getElementById('releaseCount');
+        const latestVersionStat = document.getElementById('latestVersionStat');
+        const heroDownloadBtn = document.getElementById('heroDownloadBtn');
 
-    <section class="section" id="compatibility">
-      <div class="card section-card">
-        <div class="section-head">
-          <div>
-            <h2>Hardware compatibility</h2>
-            <p>Compatibility is tracked by brand and model so users can immediately see the current validation level for their device.</p>
-          </div>
-        </div>
-        <div class="mini-grid">
-          <div class="mini-card">
-            <h3>How to read this page</h3>
-            <ul>
-              <li><strong>Full support</strong>: validated in normal use and recommended for end users</li>
-              <li><strong>Partial support</strong>: usable, but some features or behaviors still need validation</li>
-              <li><strong>Unknown</strong>: not yet tested or not enough feedback available</li>
-            </ul>
-          </div>
-          <div class="mini-card">
-            <h3>Device families</h3>
-            <ul>
-              <li>Mirabox</li>
-              <li>Ajazz</li>
-              <li>Soomfon</li>
-              <li>Other compatible clone or rebranded StreamDock-style devices</li>
-            </ul>
-          </div>
-          <div class="mini-card">
-            <h3>Important notes</h3>
-            <ul>
-              <li>Actual behavior may vary depending on firmware version, hardware revision, and Windows environment</li>
-              <li>Direct USB HID access can behave differently across seemingly similar models</li>
-              <li>Simultaneous active control with the vendor application is not officially guaranteed</li>
-            </ul>
-          </div>
-        </div>
-
-        <div style="margin-top:18px; overflow-x:auto;">
-          <table style="width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));">
-            <thead>
-              <tr>
-                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Brand</th>
-                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Model</th>
-                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Status</th>
-                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Coverage</th>
-                <th style="text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); color:var(--text);">Comments</th>
-              </tr>
-            </thead>
-            <tbody>           
-              <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP03E</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
-              </tr>
-              <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP153E</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
-              </tr>
-              <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N3</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
-              </tr>
-              <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N4</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
-              </tr>
-              <tr>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Soomfon</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">TBD</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not yet validated</td>
-                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Add tested models here as validation progresses</td>
-              </tr>
-              <tr>
-                <td style="padding:14px 16px;">Other clones</td>
-                <td style="padding:14px 16px;">Various</td>
-                <td style="padding:14px 16px; color:var(--muted); font-weight:800;">Depends on model</td>
-                <td style="padding:14px 16px; color:var(--muted);">Case by case</td>
-                <td style="padding:14px 16px; color:var(--muted);">Compatibility may exist, but validation should be tracked per exact model</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="latest">
-      <div class="card section-card">
-        <div class="section-head">
-          <div>
-            <h2>Latest release</h2>
-            <p>The newest public GSDH package published on GitHub.</p>
-          </div>
-        </div>
-        <div id="latestContent" class="loading">Loading release information…</div>
-      </div>
-    </section>
-
-    <section class="section" id="history">
-      <div class="card section-card">
-        <div class="section-head">
-          <div>
-            <h2>Release history</h2>
-            <p>Older packaged versions remain available here once published.</p>
-          </div>
-        </div>
-        <div id="historyContent" class="loading">Loading release history…</div>
-      </div>
-    </section>
-  </main>
-
-  <div class="wrap footer">
-    GSDH download center powered by GitHub Releases · <a href="https://github.com/androme13/GSDH" target="_blank" rel="noopener">Repository</a>
-  </div>
-
-  <script>
-    const owner = 'androme13';
-    const repo = 'GSDH';
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases`;
-
-    const latestContent = document.getElementById('latestContent');
-    const historyContent = document.getElementById('historyContent');
-    const releaseCount = document.getElementById('releaseCount');
-    const latestVersionStat = document.getElementById('latestVersionStat');
-    const heroDownloadBtn = document.getElementById('heroDownloadBtn');
-
-    function escapeHtml(str = '') {
-      return String(str)
+        function escapeHtml(str = '') {
+        return String(str)
         .replaceAll('&', '&amp;')
         .replaceAll('<', '&lt;')
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
-    }
+        }
 
-    function formatDate(value) {
-      if (!value) return 'Unknown date';
-      try {
+        function formatDate(value) {
+        if (!value) return 'Unknown date';
+        try {
         return new Date(value).toLocaleString(undefined, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
         });
-      } catch {
+        } catch {
         return value;
-      }
-    }
+        }
+        }
 
-    function formatSize(bytes = 0) {
-      if (!bytes) return 'Unknown size';
-      const units = ['B', 'KB', 'MB', 'GB'];
-      let size = bytes;
-      let index = 0;
-      while (size >= 1024 && index < units.length - 1) {
+        function formatSize(bytes = 0) {
+        if (!bytes) return 'Unknown size';
+        const units = ['B', 'KB', 'MB', 'GB'];
+        let size = bytes;
+        let index = 0;
+        while (size >= 1024 && index < units.length - 1) {
         size /= 1024;
         index += 1;
-      }
-      return `${size.toFixed(size >= 10 || index === 0 ? 0 : 1)} ${units[index]}`;
-    }
+        }
+        return `${size.toFixed(size >= 10 || index === 0 ? 0 : 1)} ${units[index]}`;
+        }
 
-    function getReleaseTitle(release) {
-      return release.name?.trim() || release.tag_name || 'Untitled release';
-    }
+        function getReleaseTitle(release) {
+        return release.name?.trim() || release.tag_name || 'Untitled release';
+        }
 
-    function getAssets(release) {
-      return (release.assets || []).filter(asset => {
+        function getAssets(release) {
+        return (release.assets || []).filter(asset => {
         if (!asset?.browser_download_url) return false;
         const lower = String(asset.name || '').toLowerCase();
         return lower.endsWith('.zip') || lower.endsWith('.7z') || lower.endsWith('.rar') || lower.endsWith('.msi') || lower.endsWith('.exe');
-      });
-    }
+        });
+        }
 
-    function getPrimaryAsset(release) {
-      const assets = getAssets(release);
-      const zip = assets.find(asset => String(asset.name || '').toLowerCase().endsWith('.zip'));
-      return zip || assets[0] || null;
-    }
+        function getPrimaryAsset(release) {
+        const assets = getAssets(release);
+        const zip = assets.find(asset => String(asset.name || '').toLowerCase().endsWith('.zip'));
+        return zip || assets[0] || null;
+        }
 
-    function buildAssetsHtml(release) {
-      const assets = getAssets(release);
-      if (!assets.length) {
+        function buildAssetsHtml(release) {
+        const assets = getAssets(release);
+        if (!assets.length) {
         return `<div class="empty">No packaged downloadable asset is attached to this release yet. Attach your plugin ZIP in the GitHub release assets and it will appear here automatically.</div>`;
-      }
+        }
 
-      return `<div class="assets">${assets.map(asset => `
+        return `<div class="assets">${assets.map(asset => `
         <div class="asset">
-          <div class="asset-main">
-            <div class="asset-name">${escapeHtml(asset.name)}</div>
-            <div class="asset-meta">${formatSize(asset.size)} · ${asset.download_count ?? 0} downloads</div>
-          </div>
-          <a class="btn btn-primary" href="${asset.browser_download_url}" target="_blank" rel="noopener">Download</a>
+        <div class="asset-main">
+        <div class="asset-name">${escapeHtml(asset.name)}</div>
+        <div class="asset-meta">${formatSize(asset.size)} · ${asset.download_count ?? 0} downloads</div>
         </div>
-      `).join('')}</div>`;
-    }
+        <a class="btn btn-primary" href="${asset.browser_download_url}" target="_blank" rel="noopener">Download</a>
+        </div>
+        `).join('')}</div>`;
+        }
 
-    function buildLatestHtml(release) {
-      return `
+        function buildLatestHtml(release) {
+        return `
         <div class="latest-grid">
-          <div class="panel">
-            <div class="release-badge">Latest</div>
-            <div class="release-title">${escapeHtml(getReleaseTitle(release))}</div>
-            <div class="meta">
-              <span><strong>Tag:</strong> ${escapeHtml(release.tag_name || 'N/A')}</span>
-              <span><strong>Published:</strong> ${escapeHtml(formatDate(release.published_at))}</span>
-              <span><strong>Status:</strong> ${release.prerelease ? 'Pre-release' : 'Stable release'}</span>
-            </div>
-            <div class="release-body">${escapeHtml(release.body || '')}</div>
-          </div>
-          <div class="panel">
-            <h3 style="margin:0 0 14px; font-size:20px; letter-spacing:-0.02em;">Download assets</h3>
-            ${buildAssetsHtml(release)}
-          </div>
+        <div class="panel">
+        <div class="release-badge">Latest</div>
+        <div class="release-title">${escapeHtml(getReleaseTitle(release))}</div>
+        <div class="meta">
+        <span><strong>Tag:</strong> ${escapeHtml(release.tag_name || 'N/A')}</span>
+        <span><strong>Published:</strong> ${escapeHtml(formatDate(release.published_at))}</span>
+        <span><strong>Status:</strong> ${release.prerelease ? 'Pre-release' : 'Stable release'}</span>
         </div>
-      `;
-    }
+        <div class="release-body">${escapeHtml(release.body || '')}</div>
+        </div>
+        <div class="panel">
+        <h3 style="margin:0 0 14px; font-size:20px; letter-spacing:-0.02em;">Download assets</h3>
+        ${buildAssetsHtml(release)}
+        </div>
+        </div>
+        `;
+        }
 
-    function buildHistoryItem(release) {
-      const assets = getAssets(release);
-      const actions = assets.length
+        function buildHistoryItem(release) {
+        const assets = getAssets(release);
+        const actions = assets.length
         ? assets.map(asset => `<a class="btn btn-secondary" href="${asset.browser_download_url}" target="_blank" rel="noopener">${escapeHtml(asset.name)}</a>`).join('')
         : `<span class="btn btn-secondary" style="cursor: default; opacity: 0.75;">No packaged asset</span>`;
 
-      return `
+        return `
         <div class="history-item">
-          <div class="history-main">
-            <h3>${escapeHtml(getReleaseTitle(release))}</h3>
-            <p><strong>${escapeHtml(release.tag_name || 'N/A')}</strong> · ${escapeHtml(formatDate(release.published_at))} · ${release.prerelease ? 'Pre-release' : 'Release'}</p>
-          </div>
-          <div class="history-actions">${actions}</div>
+        <div class="history-main">
+        <h3>${escapeHtml(getReleaseTitle(release))}</h3>
+        <p><strong>${escapeHtml(release.tag_name || 'N/A')}</strong> · ${escapeHtml(formatDate(release.published_at))} · ${release.prerelease ? 'Pre-release' : 'Release'}</p>
         </div>
-      `;
-    }
+        <div class="history-actions">${actions}</div>
+        </div>
+        `;
+        }
 
-    async function loadReleases() {
-      try {
+        async function loadReleases() {
+        try {
         const response = await fetch(apiUrl, {
-          headers: {
-            'Accept': 'application/vnd.github+json'
-          }
+        headers: {
+        'Accept': 'application/vnd.github+json'
+        }
         });
 
         if (!response.ok) {
-          throw new Error(`GitHub API returned ${response.status}`);
+        throw new Error(`GitHub API returned ${response.status}`);
         }
 
         const json = await response.json();
@@ -947,13 +974,13 @@
         releaseCount.textContent = String(releases.length);
 
         if (!releases.length) {
-          latestVersionStat.textContent = 'Not published yet';
-          latestContent.innerHTML = `<div class="empty">No public release has been published for <span class="mono">${owner}/${repo}</span> yet. As soon as the first release is published with a plugin ZIP attached, this page will populate automatically.</div>`;
-          historyContent.innerHTML = `<div class="empty">Release history will appear here after the first published release.</div>`;
-          heroDownloadBtn.removeAttribute('href');
-          heroDownloadBtn.style.pointerEvents = 'none';
-          heroDownloadBtn.style.opacity = '0.65';
-          return;
+        latestVersionStat.textContent = 'Not published yet';
+        latestContent.innerHTML = `<div class="empty">No public release has been published for <span class="mono">${owner}/${repo}</span> yet. As soon as the first release is published with a plugin ZIP attached, this page will populate automatically.</div>`;
+        historyContent.innerHTML = `<div class="empty">Release history will appear here after the first published release.</div>`;
+        heroDownloadBtn.removeAttribute('href');
+        heroDownloadBtn.style.pointerEvents = 'none';
+        heroDownloadBtn.style.opacity = '0.65';
+        return;
         }
 
         const latest = releases[0];
@@ -962,24 +989,24 @@
 
         const primary = getPrimaryAsset(latest);
         if (primary) {
-          heroDownloadBtn.href = primary.browser_download_url;
-          heroDownloadBtn.textContent = 'Download latest ZIP';
+        heroDownloadBtn.href = primary.browser_download_url;
+        heroDownloadBtn.textContent = 'Download latest ZIP';
         }
 
         const older = releases.slice(1);
         historyContent.innerHTML = older.length
-          ? `<div class="history">${older.map(buildHistoryItem).join('')}</div>`
-          : `<div class="empty">Only one public release is available at the moment.</div>`;
-      } catch (error) {
+        ? `<div class="history">${older.map(buildHistoryItem).join('')}</div>`
+        : `<div class="empty">Only one public release is available at the moment.</div>`;
+        } catch (error) {
         console.error(error);
         latestContent.innerHTML = `<div class="error">Unable to retrieve release data from GitHub right now.</div>`;
         historyContent.innerHTML = `<div class="error">Unable to retrieve release history from GitHub right now.</div>`;
         releaseCount.textContent = '—';
         latestVersionStat.textContent = 'Unavailable';
-      }
-    }
+        }
+        }
 
-    loadReleases();
-  </script>
+        loadReleases();
+    </script>
 </body>
 </html>
