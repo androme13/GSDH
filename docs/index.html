@@ -915,6 +915,20 @@
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
                             </tr>
                             <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">N4 / SDN4 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Non-Pro family. Does not imply Pro-only features such as knob LED rings or vibration.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E PRO</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">VID/PID to confirm</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not claimed until hardware identification confirms whether it maps to the Pro family.</td>
+                            </tr>
+                            <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N3</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
@@ -923,10 +937,24 @@
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N1</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">N1 / SDN1 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Recognized as VID:PID 6603:1011 or 6603:1000. Hardware validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N4</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">N4 / SDN4 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Non-Pro family. Does not imply Pro-only features such as knob LED rings or vibration.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">N4 Pro</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">N4 Pro / SDN4Pro family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Separate Pro family. Final validation is pending the Ajazz AKP05E PRO hardware check.</td>
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">VSD</td>
@@ -1108,6 +1136,15 @@
         return zip || assets[0] || null;
         }
 
+        function getReleaseDownloadCount(release) {
+        return getAssets(release).reduce((total, asset) => total + Number(asset.download_count || 0), 0);
+        }
+
+        function formatDownloadCount(count) {
+        const value = Number(count || 0);
+        return `${value.toLocaleString()} ${value === 1 ? 'download' : 'downloads'}`;
+        }
+
         function buildAssetsHtml(release) {
         const assets = getAssets(release);
         if (!assets.length) {
@@ -1135,6 +1172,7 @@
         <span><strong>Tag:</strong> ${escapeHtml(release.tag_name || 'N/A')}</span>
         <span><strong>Published:</strong> ${escapeHtml(formatDate(release.published_at))}</span>
         <span><strong>Status:</strong> ${release.prerelease ? 'Pre-release' : 'Stable release'}</span>
+        <span><strong>Downloads:</strong> ${escapeHtml(formatDownloadCount(getReleaseDownloadCount(release)))}</span>
         </div>
         <div class="release-body">${escapeHtml(release.body || '')}</div>
         </div>
@@ -1156,7 +1194,7 @@
         <div class="history-item">
         <div class="history-main">
         <h3>${escapeHtml(getReleaseTitle(release))}</h3>
-        <p><strong>${escapeHtml(release.tag_name || 'N/A')}</strong> · ${escapeHtml(formatDate(release.published_at))} · ${release.prerelease ? 'Pre-release' : 'Release'}</p>
+        <p><strong>${escapeHtml(release.tag_name || 'N/A')}</strong> · ${escapeHtml(formatDate(release.published_at))} · ${release.prerelease ? 'Pre-release' : 'Release'} · ${escapeHtml(formatDownloadCount(getReleaseDownloadCount(release)))}</p>
         </div>
         <div class="history-actions">${actions}</div>
         </div>
