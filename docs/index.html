@@ -297,8 +297,9 @@
             margin-top: 18px;
             max-height: 620px;
             overflow-x: auto;
-            overflow-y: auto;
+            overflow-y: scroll;
             scrollbar-gutter: stable;
+            scrollbar-color: rgba(240, 79, 79, 0.72) rgba(255,255,255,0.06);
         }
 
         .compat-table-wrap thead th {
@@ -379,9 +380,34 @@
             white-space: pre-wrap;
             word-break: break-word;
             max-height: 420px;
-            overflow-y: auto;
+            overflow-y: scroll;
             padding-right: 8px;
             scrollbar-gutter: stable;
+            scrollbar-color: rgba(240, 79, 79, 0.72) rgba(255,255,255,0.06);
+        }
+
+        .compat-table-wrap::-webkit-scrollbar,
+        .release-body::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .compat-table-wrap::-webkit-scrollbar-track,
+        .release-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 999px;
+        }
+
+        .compat-table-wrap::-webkit-scrollbar-thumb,
+        .release-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(255, 138, 138, 0.88), rgba(240, 79, 79, 0.78));
+            border-radius: 999px;
+            border: 2px solid rgba(15, 21, 31, 0.9);
+        }
+
+        .compat-table-wrap::-webkit-scrollbar-thumb:hover,
+        .release-body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, rgba(255, 157, 157, 0.95), rgba(240, 79, 79, 0.9));
         }
 
             .release-body:empty::before {
