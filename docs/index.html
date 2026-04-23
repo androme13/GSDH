@@ -293,6 +293,21 @@
             padding: 24px;
         }
 
+        .compat-table-wrap {
+            margin-top: 18px;
+            max-height: 620px;
+            overflow-x: auto;
+            overflow-y: auto;
+            scrollbar-gutter: stable;
+        }
+
+        .compat-table-wrap thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: #151d29;
+        }
+
         .section-head {
             display: flex;
             align-items: flex-start;
@@ -363,6 +378,10 @@
             line-height: 1.8;
             white-space: pre-wrap;
             word-break: break-word;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+            scrollbar-gutter: stable;
         }
 
             .release-body:empty::before {
@@ -888,7 +907,7 @@
                     </div>
                 </div>
 
-                <div style="margin-top:18px; overflow-x:auto;">
+                <div class="compat-table-wrap">
                     <table style="width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));">
                         <thead>
                             <tr>
@@ -902,31 +921,59 @@
                         <tbody>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP03E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP03E (EU)</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Validated for full support with the current GSDH release</td>
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E (EU)</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">N4 / SDN4 family</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Non-Pro family. Does not imply Pro-only features such as knob LED rings or vibration.</td>
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E PRO</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP05E PRO (EU)</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-weight:800;">Unknown</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">VID/PID to confirm</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Not claimed until hardware identification confirms whether it maps to the Pro family.</td>
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Ajazz</td>
-                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP153E</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">AKP153E (EU)</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Usable with limitations</td>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Partially supported. Additional validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">293 V2</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">293 / SD293 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Known supported MiraBox layout with no current layout doubt in GSDH.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">M18</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">M18 / SDM18 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Recognized as VID:PID 6603:1009. Three rows of 5 LCD keys plus 3 non-LCD auxiliary buttons. Hardware validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">M18E (EU)</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#ffcf70; font-weight:800;">Partial support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">M18 / SDM18 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Recognized as VID:PID 6603:1012. Hardware validation is still in progress.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line);">M3</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:#90f0b4; font-weight:800;">Full support</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">M3 / SDM3 family</td>
+                                <td style="padding:14px 16px; border-bottom:1px solid var(--line); color:var(--muted);">Known supported MiraBox layout with no current layout doubt in GSDH.</td>
                             </tr>
                             <tr>
                                 <td style="padding:14px 16px; border-bottom:1px solid var(--line);">Mirabox</td>
